@@ -27,16 +27,22 @@ public class CrudController {
     }
 
     @PostMapping(value = "/delete")
-    public ModelAndView getDelete(HttpServletRequest request) {
+    public ModelAndView getDelete(@RequestParam long idUser) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
-        long id = Long.parseLong(request.getParameter("idUser"));
-        userService.deleteUser(id);
+        userService.deleteUser(idUser);
         return modelAndView;
     }
+    @GetMapping("/create")
+public ModelAndView createPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("createUser");
+        modelAndView.addObject("userAdd", new User());
+        return modelAndView;
 
+}
     @PostMapping(value = "/add")
-    public ModelAndView getAdd(@ModelAttribute("user") User theUser) {
+    public ModelAndView getAdd(@ModelAttribute("userAdd") User theUser) {
         ModelAndView modelAndView = new ModelAndView();
         userService.createUser(theUser);
         modelAndView.setViewName("redirect:/");
@@ -44,11 +50,10 @@ public class CrudController {
     }
 
     @PostMapping(value = "/preupdate")
-    public ModelAndView getUpdate(HttpServletRequest request) {
+    public ModelAndView getUpdate(@RequestParam long idUser) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("update");
-        long id = Long.parseLong(request.getParameter("idUser"));
-        User user = userService.readUser(id);
+        User user = userService.readUser(idUser);
         modelAndView.addObject("user", user);
         return modelAndView;
     }
