@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CrudController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(value = "/")
     public ModelAndView getEditPage() {

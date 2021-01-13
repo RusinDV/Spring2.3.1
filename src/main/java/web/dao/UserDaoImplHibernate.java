@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDaoImplHibernate implements UserDao {
 
     @Autowired
-    EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     @PersistenceContext
     private EntityManager em;
